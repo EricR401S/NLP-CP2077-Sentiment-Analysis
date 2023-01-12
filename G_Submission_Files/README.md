@@ -1,6 +1,6 @@
 # NLP-CP2077-Sentiment-Analysis
 
-# Introduction
+# Abstract 
 
 For our group assignment, we had to find a dataset on which we would apply a generative
 model and a neural network model. Our dataset of interest was a set of the most recent 16,599
@@ -17,7 +17,57 @@ recommended). Our models would be trained on a training set of 67% of the data a
 33% of the data, and both of them would later be trained and tested in the same manner on a
 synthetic dataset created by the generative model.
 
-Steps to reproduce the experience:
+As for the resulting accuracies, the generative model and the BiLSTM model had overall
+accuracy scores of 82.36% and 92.2% on a specific run respectively in predicting the labels of the
+original data. For the BiLSTM, it is important to note that the accuracy fluctuates per run, often
+oscillating between 80% and 95% after 5 epochs with an embedding size of 64. In the run with
+92.2%, it surpassed the generative’s model predictive performance during the third epoch.
+However, when training on the synthetic data, an advantage of the generative model was made
+apparent. This model achieved 97.20% accuracy at predicting the labels on the training set of the
+synthetic data. As for the BiLSTM, it achieved 92.8% and did not surpass the generative model’s
+performance. We theorize the main cause behind the performance disparity may have occurred
+because the BiLSTM considers order and long range dependencies in a bidirectional manner
+(Dolphin, 2020), whereas our bag of words used a Naive Bayes approach when classifying reviews
+as well as synthetically generating them. This implies that every review in the synthetic data was
+a bag of words with no regard to order, much less the concept of a long range, contextual
+dependency. In addition, during the synthetic generation process, each review used tokens
+exclusively found within the tokens of its recommended or not recommended class, and there
+was a unique token difference of 7,000 tokens between the two classes. In this sense, since our
+synthetic reviews disregard order, long-range, contextual dependencies and contained words
+obtained randomly from a corpus of a specific class, our generative model was well suited to
+applying the Naive Bayes theorem to classify the reviews in the test set and gained an advantage
+over the BiLSTM’s affinity for order and handling of long-term memory.
+
+
+# How did our data look?
+
+![image](https://user-images.githubusercontent.com/70504872/212144615-468609b6-11b8-4704-8f93-185d4c304e66.png)
+
+
+# Generative Model and LSTM model results for real data
+
+Generative:
+![image](https://user-images.githubusercontent.com/70504872/212144783-f57acc5a-fee3-42a4-bd62-022ead97ce20.png)
+
+BiLSTM:
+![image](https://user-images.githubusercontent.com/70504872/212145362-2f44b75a-131b-4ae8-9200-a2edc13677cf.png)
+
+
+# Generative Model and LSTM model results for synthetic data
+
+Generative:
+![image](https://user-images.githubusercontent.com/70504872/212145137-eefdcbdb-6423-4822-9948-3ac3c2501f60.png)
+
+BiLSTM:
+![image](https://user-images.githubusercontent.com/70504872/212145472-1b8cb59b-748d-436c-a8c2-30b93161fec5.png)
+
+
+# Reproduceability
+
+All the necessary files to reproduce the project are contained within the G_submission folder.
+
+Steps:
+
 1. Run the steam scraper (A_steam_scraper.py) (This step was completed, but if run again will generate a new dataset, it won't be the same as ours, since the scraper gets the most recent 16K reviews)
 2. Master dataset created (cp2077_reviews.csv.zip)
 3. Run the cleaning file for generative model (B_cleaning_gen_model.py)
